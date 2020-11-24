@@ -1,4 +1,4 @@
-package Console;
+package objects;
 
 public class Produit {
     Produit(){

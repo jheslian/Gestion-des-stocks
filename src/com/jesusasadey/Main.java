@@ -1,6 +1,6 @@
 package com.jesusasadey;
 
-import Console.Gestion;
+import console.Gestion;
 
 import java.awt.*;
 
