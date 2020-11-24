@@ -2,7 +2,9 @@ package console;
 
 import objects.Administrateur;
 import objects.BaseClient;
+import produit.Achat;
 import produit.BaseProduit;
+import produit.PanierDuClient;
 import produit.Produit;
 
 import java.util.Scanner;
@@ -27,6 +29,7 @@ public class Gestion {
                     break;
                 case "2":
                     choixClient();
+
                     break;
                 case "3":
                     isRunning = false;
@@ -94,6 +97,9 @@ public class Gestion {
         String choix = in.nextLine();
         if (choix.equals( "1" )){
             logInClient();
+            PanierDuClient panierDuClient = new PanierDuClient();
+            panierDuClient = Achat.acheterDesProduit( baseProduit , panierDuClient );
+
         }else if (choix.equals( "2" )) {
             creerUnCompte();
         } else {

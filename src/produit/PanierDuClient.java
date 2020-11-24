@@ -26,19 +26,22 @@ public class PanierDuClient {
 
     public float prixTotal(){
         float prix = 0;
-        if (panier != null){
+        if (this.panier != null){
             for (Produit produit : this.panier) {
                 prix += produit.getPrixUnitaire() * produit.getQuantiteEnStock();
             }
         }return prix;
     }
 
-    public ArrayList<Produit> supprimerUnProduit(String nomDeProduit) {
-        for (Produit produit : this.panier) {
-            if (produit.getNomProduit().equals( nomDeProduit )){
-                this.panier.remove( produit );
+    public ArrayList<Produit> supprimerUnProduit(Produit produitASupprimer) {
+        if(this.panier != null){
+            for (Produit produit : this.panier) {
+                if (produit.getNomProduit().equals( produitASupprimer.getNomProduit() )){
+                    this.panier.remove( produit );
+                }
             }
-        }return panier;
+        }
+        return panier;
     }
 
     public ArrayList<Produit> ajouteProduit(Produit produitAjouter){
@@ -62,7 +65,6 @@ public class PanierDuClient {
             if (produit.getNomProduit().equals( nomDeProduit )){
                 produit.setQuantiteEnStock( (produit.getQuantiteEnStock() + quantite) );
             }
-
         }return  panier;
     }
 
