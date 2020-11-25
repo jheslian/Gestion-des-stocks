@@ -1,5 +1,6 @@
 package Fenetres;
 
+import console.Administrateur;
 import objects.BaseClient;
 
 import javax.swing.*;
@@ -107,20 +108,36 @@ public class Bienvenue extends JFrame {
         panel1.add( clientBouton );
 
         clientBouton.addActionListener( e-> {
-            if (baseClient.isClientExist( nvEmailTextField.getText().trim(), nvMotDePasseTextField.getText().trim() )){
+            if (baseClient.isClientExist( idTextField.getText().trim(), motDePasseField.getText().trim() )){
                 this.setVisible( false );
+                (new AchatDuClient()).setVisible( true );
             }else
                 JOptionPane.showMessageDialog( null, "Erreur de saisie ou compte n'existe pas", "Erreur", JOptionPane.ERROR_MESSAGE );
+        } );
+
+        /******************     Connexion Administrateur    ********************/
+        JButton administrateurBouton = new JButton("Administrateur"); // administrateur
+        panel1.add( administrateurBouton );
+
+        administrateurBouton.addActionListener( e -> {
+
+            if ((idTextField.getText().trim().equals( Administrateur.getIdentifiant())) && (motDePasseField.getText().trim().equals( Administrateur.getMotDePasse() ))){
+                this.setVisible( false );
+                (new GestionAdministrateur()).setVisible( true );
+            }else
+                JOptionPane.showMessageDialog( null, "Identifiant ou mot de passe incorrect", "Erreur", JOptionPane.ERROR_MESSAGE );
 
         } );
 
-        /******************     Administrateur    ********************/
-        JButton administrateurBouton = new JButton("Administrateur"); // administrateur
-        panel1.add( administrateurBouton );
 
         /******************     Quitter    ********************/
         JButton quitterBouton = new JButton("Quitter"); // quitter
         panel1.add( quitterBouton );
+
+        quitterBouton.addActionListener( e ->{
+            System.exit( 0 );
+
+        } );
 
 
 

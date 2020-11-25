@@ -1,6 +1,5 @@
 package console;
 
-import objects.Administrateur;
 import objects.BaseClient;
 import produit.Achat;
 import produit.BaseProduit;
@@ -179,8 +178,7 @@ public class Gestion {
         String nom = choix();
         System.out.println("Mot De Passe: ");
         String motDePasse = choix();
-        Administrateur administrateur = new Administrateur();
-        if ((administrateur.nom).equals( nom ) && (administrateur.motDePasse).equals( motDePasse )) {
+        if ((Administrateur.getIdentifiant()).equals( nom ) && (Administrateur.getMotDePasse()).equals( motDePasse )) {
             System.out.println( "Acces l'adminisrateur succes" );
             choixAdministrateur();
         } else {

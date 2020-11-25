@@ -43,6 +43,7 @@ public class BaseClient {
                 return  clientExist;
             }
         }
+        System.out.println(clientExist);
         return clientExist;
     }
 

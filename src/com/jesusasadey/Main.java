@@ -1,6 +1,7 @@
 package com.jesusasadey;
 
 import Fenetres.Bienvenue;
+import Fenetres.ListeDesProduits;
 
 
 import java.awt.*;
@@ -14,7 +15,8 @@ public class Main {
             public void run() {
                 try {
                     //new Gestion();
-                    Bienvenue fenetreClient =  new Bienvenue();
+                    //Bienvenue fenetreClient =  new Bienvenue();
+                    ListeDesProduits fenetreClient =new ListeDesProduits();
                     fenetreClient.setVisible( true );
 
                 } catch (Exception e) {

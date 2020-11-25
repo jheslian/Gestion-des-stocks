@@ -34,7 +34,6 @@ public class PanierDuClient {
             System.out.println("le panier est vide");
         }
 
-
     }
 
     public float prixTotal(){
