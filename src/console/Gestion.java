@@ -98,7 +98,7 @@ public class Gestion {
                 int quantiteProduit = Integer.parseInt( in.nextLine() );
                 Produit produit =new Produit(nomDeProduit, prix, quantiteProduit);
                 baseProduit.ajouteProduit( produit);
-            }
+        }
     }
 
     private void choixClient() throws IOException {

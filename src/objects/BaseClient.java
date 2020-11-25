@@ -1,5 +1,6 @@
 package objects;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class BaseClient {
@@ -18,6 +19,8 @@ public class BaseClient {
         Client client = new Client( nomClient, prenomClient, email, motDePasseClient );
         getListDeClient().add(client);
         System.out.println("Vous avez bien créer votre compte");
+
+
 
     }
     public void affichLesListeClient(Client client, String liste) {
