@@ -12,7 +12,6 @@ public class BaseProduit {
 
         listeDeProduit = new ArrayList<>();
 
-
     }
 
     public ArrayList<Produit> getListeDeProduit() {

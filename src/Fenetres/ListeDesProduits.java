@@ -1,15 +1,20 @@
 package Fenetres;
 
-import objects.BaseClient;
 import produit.BaseProduit;
 import produit.Produit;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class ListeDesProduits extends JFrame {
     JTextField quantiteProduitTextField;
     static BaseProduit baseProduit = new BaseProduit();
+    JTable table;
+    DefaultTableModel model = new DefaultTableModel();
+    JScrollPane scrollPane;
+    String [] lesChamps = {"nom", "prix" , "quantite"};
+
 
 
     public ListeDesProduits(){
@@ -22,11 +27,10 @@ public class ListeDesProduits extends JFrame {
         JPanel panel = (JPanel)this.getContentPane();
         panel.setLayout( new BorderLayout() );
 
-        //test pour l'affichage du produit
-        //JLabel print = new JLabel("print");
-        //panel.add( print, BorderLayout.PAGE_START );
+
 
         /******************     table des produits    ********************/
+        /*
         String [] lesChamps = {"nom", "prix" , "quantite"};
         String [][] donnees = new String[baseProduit.getListeDeProduit().size()][3];
         for (int i = 0; i < baseProduit.getListeDeProduit().size(); i++) {
@@ -34,7 +38,7 @@ public class ListeDesProduits extends JFrame {
             donnees[i][1] = Float.toString(baseProduit.getListeDeProduit().get( i ).getPrixUnitaire());
             donnees[i][2] = Integer.toString(baseProduit.getListeDeProduit().get( i ).getQuantiteEnStock());
         }
-
+        */
 
         /******************     panel pour les saisies   ********************/
         JPanel panel3 = new JPanel();
@@ -104,17 +108,11 @@ public class ListeDesProduits extends JFrame {
             prixProduitTextField.setText( "" );
             quantiteProduitTextField.setText( "" );
 
-            //test pour l'affichage
-            //print.setText( nomProduitTextField.getText()+ prixProduitTextField.getText() +""+ quantiteProduitTextField.getText() );
-
         } );
 
         /******************     supprimer le produit    ********************/
         JButton supprimerProduitBtn = new JButton("Supprimer");
         panelBouton.add( supprimerProduitBtn);
-
-
-
 
 
         /******************     afficher le produit    ********************/
@@ -124,6 +122,7 @@ public class ListeDesProduits extends JFrame {
         this.setVisible( true );
 
         afficherProduitsBtn.addActionListener( e->{
+            /*
             JTable tableDesProduits = new JTable(donnees,lesChamps);
             //panel.add( tableDesProduits, BorderLayout.CENTER );
 
@@ -131,9 +130,31 @@ public class ListeDesProduits extends JFrame {
             JScrollPane sp = new JScrollPane(tableDesProduits);
             panel.add( sp, BorderLayout.CENTER );
 
+             */
+            String [] lesChamps = {"nom", "prix" , "quantite"};
+            String [][] donnees = new String[baseProduit.getListeDeProduit().size()][3];
+            for (int i = 0; i < baseProduit.getListeDeProduit().size(); i++) {
+                donnees[i][0] = baseProduit.getListeDeProduit().get( i ).getNomProduit();
+                donnees[i][1] = Float.toString(baseProduit.getListeDeProduit().get( i ).getPrixUnitaire());
+                donnees[i][2] = Integer.toString(baseProduit.getListeDeProduit().get( i ).getQuantiteEnStock());
+            }
+            table =new JTable(donnees,lesChamps);
+            scrollPane = new JScrollPane(table);
+            getContentPane().add( scrollPane,BorderLayout.CENTER );
+
+            /******************     jtable affiche pas sans -> en bas    ********************/
+            JLabel print = new JLabel("    ");
+            panel.add( print, BorderLayout.PAGE_START );
+            print.setText( "");
+
 
         } );
     }
+
+
+
+
+
 
     private void ajouteQuantite() {
         for (int i = 0; i < baseProduit.getListeDeProduit().size(); i++) {
