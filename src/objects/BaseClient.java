@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class BaseClient {
     private ArrayList<Client> listeDeClient = null;
-    //private HashMap<Integer, Client> listDeLivresHashMap = null;
 
     public BaseClient(){
         listeDeClient = new ArrayList<>();
@@ -22,9 +21,14 @@ public class BaseClient {
 
     }
     public void affichLesListeClient(Client client, String liste) {
-        for (int i=0; i<getListDeClient().size(); i++){
-            System.out.println(getListDeClient().get(i).getEmail() + " / " + getListDeClient().get(i).getMotDePasseClient());
+        if (this.listeDeClient != null) {
+            for (int i = 0; i < getListDeClient().size(); i++) {
+                System.out.println( getListDeClient().get( i ).getEmail() + " / " + getListDeClient().get( i ).getMotDePasseClient() );
+            }
+        } else {
+            System.out.println("Aucun client sur la base");
         }
+
     }
 
     public boolean isClientExist(String email, String motDePasse){

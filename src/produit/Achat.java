@@ -12,18 +12,20 @@ public class Achat {
                            "1 Ajouter un produit\n" +
                             "2 Supprimer un produit\n" +
                             "3 Afficher la liste des produits\n" +
-                            "4 Abandonner\n");
+                            "4 Valider la panier\n" +
+                            "5 Abandonner\n");
 
     }
 
     public static PanierDuClient acheterDesProduit(BaseProduit baseProduit, PanierDuClient panierClient){
         boolean continueAchat = true;
         Scanner scanner = new Scanner( System.in );
-        String choix = scanner.nextLine();
+        String choix;
 
         while (continueAchat){
             menuAchat();
 
+            choix = scanner.nextLine();
             switch (choix){
                 case "1": // ajouter un produit
                     panierClient = creationDuPanier( baseProduit, panierClient );
@@ -34,8 +36,17 @@ public class Achat {
                 case "3": // afficher la liste des produits
                     panierClient.afficherUnPanier();
                     break;
-
-                case "4": // abandoner
+                case "4": // Valider la panier
+                    {
+                        if (panierClient != null) {
+                            panierClient.setValiderLePanier( true );
+                            continueAchat = false;
+                        } else {
+                            System.out.println("Votre panier est vide");
+                        }
+                    }
+                    break;
+                case "5": // abandoner
                     continueAchat = false;
                     break;
 
@@ -50,9 +61,9 @@ public class Achat {
         baseProduit.affichLesListeProduit();
         System.out.println("Donner le nom du produit que vous voulez supprimer: ");
         String nomDeProduit = scanner.nextLine();
-        for (Produit produit : panierClient.getPanier()) {
-            if (nomDeProduit.equals( produit.getNomProduit() )){
-                panierClient.supprimerUnProduit( produit );
+        for (int i = 0; i < baseProduit.getListeDeProduit().size(); i++) {
+            if (nomDeProduit.equals( baseProduit.getListeDeProduit().get( i ).getNomProduit() )){
+                baseProduit.getListeDeProduit().get( i ).setQuantiteEnStock( (baseProduit.getListeDeProduit().get( i ).getQuantiteEnStock() + 1) );
             }
         }
 
@@ -61,20 +72,26 @@ public class Achat {
 
     private static PanierDuClient creationDuPanier(BaseProduit baseProduit, PanierDuClient panierClient){
         Scanner scanner = new Scanner( System.in );
+        int quantiteEnStock;
         float prix=0;
         baseProduit.affichLesListeProduit();
         System.out.println("Donner le nom du produit que vous voulez ajouter: ");
         String nomDeProduit = scanner.nextLine();
-        for (Produit produit : baseProduit.getListeDeProduit()) {
-            if (nomDeProduit.equals( produit.getNomProduit() )){
-                prix = produit.getPrixUnitaire();
 
+        for (int i = 0; i < baseProduit.getListeDeProduit().size(); i++) {
+            if (nomDeProduit.equals( baseProduit.getListeDeProduit().get( i ).getNomProduit() )){
+               if (baseProduit.getListeDeProduit().get( i ).getQuantiteEnStock() > 0){
+                   prix = baseProduit.getListeDeProduit().get( i ).getPrixUnitaire();
+                   baseProduit.getListeDeProduit().get( i ).setQuantiteEnStock( (baseProduit.getListeDeProduit().get( i ).getQuantiteEnStock() - 1) );
+                   panierClient.ajouteProduit( new Produit( nomDeProduit,prix,1 ) );
+                   return panierClient;
+
+               }else {
+                   System.out.println("Désolé, " + nomDeProduit + " est en rupture de stock");
+               }
             }
         }
-        panierClient.ajouteProduit( new Produit( nomDeProduit,prix,1 ) );
-
         return panierClient;
-
     }
 
 }

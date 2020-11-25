@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class PanierDuClient {
     private ArrayList<Produit> panier = null;
+    private boolean validerLePanier;
 
     public PanierDuClient(){
         panier= new ArrayList<>();
@@ -14,13 +15,25 @@ public class PanierDuClient {
         return panier;
     }
 
+    public boolean getValiderLePanier() {
+        return validerLePanier;
+    }
+
+    public void setValiderLePanier(boolean validerLePanier) {
+        this.validerLePanier = validerLePanier;
+    }
 
     public void  afficherUnPanier(){
-        for (Produit produit : this.panier) {
-            System.out.println("Le nom de produit " + produit.getNomProduit() + "Prix " + produit.getPrixUnitaire() + "Quantité de produit " + produit.getQuantiteEnStock());
+        if (panier != null) {
+            for (Produit produit : this.panier) {
+                System.out.println( "Le nom de produit: " + produit.getNomProduit() + "\tPrix: " + produit.getPrixUnitaire() + "\tQuantité de produit: " + produit.getQuantiteEnStock() );
 
+            }
+            System.out.println( "Le prix total de votre panier est: " + prixTotal() );
+        } else {
+            System.out.println("le panier est vide");
         }
-        System.out.println("Le prix total de votre panier est: " + prixTotal());
+
 
     }
 
@@ -60,6 +73,7 @@ public class PanierDuClient {
         return  panier;
     }
 
+    /*
     public ArrayList<Produit> changerLaQuantité( String nomDeProduit, int quantite){
         for (Produit produit : this.panier) {
             if (produit.getNomProduit().equals( nomDeProduit )){
@@ -67,6 +81,8 @@ public class PanierDuClient {
             }
         }return  panier;
     }
+
+     */
 
 }
 

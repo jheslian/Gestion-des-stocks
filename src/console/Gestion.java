@@ -7,14 +7,18 @@ import produit.BaseProduit;
 import produit.PanierDuClient;
 import produit.Produit;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Gestion {
     Scanner in = new Scanner( System.in );
     BaseClient baseClient = new BaseClient();
     BaseProduit baseProduit = new BaseProduit();
+    static PanierDuClient panierDuClient = null;
 
-    public Gestion() {
+    public Gestion() throws IOException {
         /*
         premier menu pour demander l'utilisateur pour se connecter en tant que administrateur ou client
         */
@@ -45,7 +49,7 @@ public class Gestion {
         boolean repetition =true;
         while (repetition) {
             System.out.println( "\nVeuillez saisir votre choix: " + "\n1 Afficher tous les produit" +
-                    "\n2 Ajouter un produit" + "\n3 Supprimer un produit" +"\n4 Revenir sur le menu principal" );
+                    "\n2 Ajouter un produit" + "\n3 Supprimer un produit" + "\n4 Afficher le panier du client" + "\n5 Revenir sur le menu principal" );
             switch (choix()) {
                 case "1":
                     baseProduit.affichLesListeProduit();
@@ -60,11 +64,18 @@ public class Gestion {
                     baseProduit.supprimerUnProduit( nomDeProduit );
                     break;
                 }
-                case "4":
+                case "4": {
+                    panierDuClient.afficherUnPanier();
+                    if (panierDuClient != null){
+                        if (panierDuClient.getValiderLePanier()==true){
+                            System.out.println("Vous allez recevoir vos produits le plus tôt possible");
+                        }
+
+                    }}
+                case "5":
                     repetition=false;
             }
         }
-
     }
     private void creerUnProduit() {
         System.out.print("Nom de produit: ");
@@ -90,24 +101,58 @@ public class Gestion {
             }
     }
 
-    private void choixClient() {
+    private void choixClient() throws IOException {
         Scanner in = new Scanner( System.in );
-        System.out.println("\t 1 Acceder mon compte\n" +
-                "\t 2 Créer un compte");
-        String choix = in.nextLine();
-        if (choix.equals( "1" )){
-            logInClient();
-            PanierDuClient panierDuClient = new PanierDuClient();
-            panierDuClient = Achat.acheterDesProduit( baseProduit , panierDuClient );
+        String choix = "";
+        boolean connexionDuClient = false;
+        do {
+            do {
+                System.out.println("\t1 Acceder mon compte\n" +
+                        "\t2 Créer un compte" + "\n\t3 Quitter");
+                choix = in.nextLine();
+            }while (!choix.equals( "1" ) && !choix.equals( "2" ) && !choix.equals( "3" ));
 
-        }else if (choix.equals( "2" )) {
-            creerUnCompte();
-        } else {
-            optionInvalid();
-        }
+            switch (choix){
+                case "1": {
+                    connexionDuClient = logInClient();
+                    if (connexionDuClient == true){
+                        panierDuClient = new PanierDuClient();
+                        System.out.println("je suis connecté");
+                        panierDuClient = Achat.acheterDesProduit( baseProduit, panierDuClient );
+                    }
+
+                }break;
+                case "2" : creerUnCompte();
+                    break;
+                case "3" : connexionDuClient = true;
+                    break;
+            }
+
+        }while (connexionDuClient == false);
+    }
+
+    public boolean logInClient () throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        boolean connexionClientReussi = false;
+
+            System.out.print("Email: ");
+            String email = reader.readLine();
+            System.out.print("Mot de passe: ");
+            String motDePasse = reader.readLine();
+                if (baseClient.isClientExist( email, motDePasse )) {
+                    System.out.println( "Bienvenue!" );
+                    connexionClientReussi = true;
+                } else {
+                    System.out.println("erreur de saisie ou le compte n'existe pas");
+                    connexionClientReussi = false;
+
+                }
+
+        return connexionClientReussi;
     }
 
     private void creerUnCompte() {
+        Scanner in = new Scanner( System.in );
         System.out.print("Nom: ");
         String nom = in.nextLine();
         System.out.print("Prenom: ");
@@ -143,17 +188,6 @@ public class Gestion {
         }
     }
 
-    void logInClient () {
-        System.out.print("Email: ");
-        String email = choix();
-        System.out.print("Mot de passe: ");
-        String motDePasse = choix();
-        if (baseClient.isClientExist( email, motDePasse )) {
-            System.out.println( "Bienvenue!" );
-        } else {
-            System.out.println("Le compte n'existe pas ou vous vous êtes trompér ");
-        }
-    }
 
     String choix(){
         String input = in.nextLine();

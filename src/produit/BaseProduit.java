@@ -38,19 +38,30 @@ public class BaseProduit {
         return produitExist;
     }
     public void affichLesListeProduit() {
-        for (int i=0; i<this.listeDeProduit.size(); i++){
-            System.out.println("Nom du produit: "+this.listeDeProduit.get(i).getNomProduit() +
-                                "\tPrix: " + this.listeDeProduit.get(i).getPrixUnitaire() +
-                                "\tQuantité: " + this.listeDeProduit.get(i).getQuantiteEnStock());
+        if (this.listeDeProduit.size() > 0) {
+            for (int i = 0; i < this.listeDeProduit.size(); i++) {
+                System.out.println( "Nom du produit: " + this.listeDeProduit.get( i ).getNomProduit() +
+                        "\tPrix: " + this.listeDeProduit.get( i ).getPrixUnitaire() +
+                        "\tQuantité: " + this.listeDeProduit.get( i ).getQuantiteEnStock() );
+            }
+        } else {
+            System.out.println("La liste de produit est vide");
         }
+
     }
 
     public ArrayList<Produit> supprimerUnProduit(String nomDeProduit) {
-        for (Produit produit : this.listeDeProduit) {
-            if (produit.getNomProduit().equals( nomDeProduit )){
-                this.listeDeProduit.remove( produit );
+        if (this.listeDeProduit.size() > 0) {
+            for (Produit produit : this.listeDeProduit) {
+                if (produit.getNomProduit().equals( nomDeProduit )) {
+                    this.listeDeProduit.remove( produit );
+                }
             }
-        }return listeDeProduit;
+        } else {
+            System.out.println("La liste de produit est vide");
+        }
+
+        return listeDeProduit;
     }
 
 
