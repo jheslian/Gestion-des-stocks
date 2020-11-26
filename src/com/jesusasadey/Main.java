@@ -1,9 +1,6 @@
 package com.jesusasadey;
 
-import Fenetres.Bienvenue;
-import Fenetres.GestionAdministrateur;
-import Fenetres.ListeDesProduits;
-import Fenetres.TestListes;
+import Fenetres.*;
 
 
 import java.awt.*;
@@ -17,11 +14,18 @@ public class Main {
             public void run() {
                 try {
                     //new Gestion();
-                    Bienvenue fenetreClient =  new Bienvenue();
+
+                   // Bienvenue fenetreClient =  new Bienvenue();
                    // TestListes fenetreClient = new TestListes();
-                    //ListeDesProduits fenetreClient =new ListeDesProduits();
-                   // GestionAdministrateur fenetreClient =new GestionAdministrateur();
-                    fenetreClient.setVisible( true );
+                    ListeDesProduits fenetre =new ListeDesProduits();
+                    fenetre.setVisible( true );
+
+                    ListeDesProduitsClient fen = new ListeDesProduitsClient();
+
+                    fen.setVisible( true );
+                    //GestionAdministrateur fenetreClient =new GestionAdministrateur();
+                    //AchatDuClient fenetreClient = new AchatDuClient();
+                    //fenetreClient.setVisible( true );
 
                 } catch (Exception e) {
                     e.printStackTrace();

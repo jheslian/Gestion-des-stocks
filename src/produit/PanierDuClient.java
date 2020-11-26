@@ -1,5 +1,6 @@
 package produit;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class PanierDuClient {
@@ -45,7 +46,24 @@ public class PanierDuClient {
         }return prix;
     }
 
+
+
     public ArrayList<Produit> supprimerUnProduit(Produit produitASupprimer) {
+        if (this.panier != null) {
+            for (Produit produit : this.panier) {
+                if (produit.getNomProduit().equals( produitASupprimer.getNomProduit() )) {
+                    this.panier.remove( produit );
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog( null, "Votre panier est vide", "", JOptionPane.ERROR_MESSAGE );
+            System.out.println("Votre panier est vide ");
+        }
+        return panier;
+    }
+
+
+    public void supprimerUnProduitInterface(Produit produitASupprimer) {
         if(this.panier != null){
             for (Produit produit : this.panier) {
                 if (produit.getNomProduit().equals( produitASupprimer.getNomProduit() )){
@@ -53,8 +71,10 @@ public class PanierDuClient {
                 }
             }
         }
-        return panier;
+
     }
+
+
 
     public ArrayList<Produit> ajouteProduit(Produit produitAjouter){
         boolean siProduitExiste = false;
@@ -71,6 +91,8 @@ public class PanierDuClient {
 
         return  panier;
     }
+
+
 
     /*
     public ArrayList<Produit> changerLaQuantité( String nomDeProduit, int quantite){

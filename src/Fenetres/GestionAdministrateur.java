@@ -23,6 +23,7 @@ public class GestionAdministrateur extends JFrame {
         constraints.gridx= 0;
         constraints.gridy= 1;
 
+
         listesDesProduitsBtn.addActionListener( e ->{
                 (new ListeDesProduits()).setVisible( true );
         } );
@@ -35,8 +36,8 @@ public class GestionAdministrateur extends JFrame {
         listesDesCommandesBtn.setPreferredSize( new Dimension(200,50) );
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.gridx= 0;
-        constraints.gridy= 4;
+        constraints.gridx= 1;
+        constraints.gridy= 2;
 
         panelOption.add( listesDesCommandesBtn);
 

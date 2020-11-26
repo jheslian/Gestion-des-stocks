@@ -161,15 +161,6 @@ public class ListeDesProduits extends JFrame {
         this.setVisible( false);
 
         afficherProduitsBtn.addActionListener( e->{
-            /*
-            JTable tableDesProduits = new JTable(donnees,lesChamps);
-            //panel.add( tableDesProduits, BorderLayout.CENTER );
-
-            tableDesProduits.setBounds(30, 40, 200, 300);
-            JScrollPane sp = new JScrollPane(tableDesProduits);
-            panel.add( sp, BorderLayout.CENTER );
-
-             */
 
             JPanel panelTable = new JPanel();
             panelTable.setLayout( new GridLayout(1,1));
@@ -192,14 +183,15 @@ public class ListeDesProduits extends JFrame {
             panelBtnJTable.add( print, BorderLayout.PAGE_START );
            print.setText( "");
 
-            ( new Bienvenue()).setVisible( true );
-
+          //  ( new Bienvenue()).setVisible( true );
+            (new AchatDuClient()).setVisible( true );
 
         } );
         panelBtnJTable.add( panelBouton, BorderLayout.PAGE_END );
 
         panelFinal.add( panelDesChamps );
         panelFinal.add( panelBtnJTable );
+
     }
 
 
@@ -214,6 +206,9 @@ public class ListeDesProduits extends JFrame {
         nomProduitTextField.setText( "" );
         prixProduitTextField.setText( "" );
         quantiteProduitTextField.setText( "" );
+
     }
+
+
 
 }

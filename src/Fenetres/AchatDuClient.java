@@ -1,17 +1,177 @@
 package Fenetres;
 
+import objects.BaseClient;
+import produit.BaseProduit;
+import produit.PanierDuClient;
+import produit.Produit;
+
 import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import static Fenetres.ListeDesProduits.baseProduit;
 
 public class AchatDuClient extends JFrame {
+    JLabel prixLabel;
+    static PanierDuClient panierDuClient = new PanierDuClient();
+
     public AchatDuClient(){
         super("Achat");
 
-        this.setSize( 700, 500 );
+        this.setSize( 800, 600 );
         this.setDefaultCloseOperation( DISPOSE_ON_CLOSE);
-        this.setLocationRelativeTo( null );
+        this.setLocation( 50,50 );
         this.setVisible( false );
+
+/*
+        String [] lesChamps = {"nom", "prix" , "quantite"};
+
+        String [][] donnees = new String[panierDuClient.getPanier().size()][3];
+        for (int i = 0; i < panierDuClient.getPanier().size(); i++) {
+            donnees[i][0] = panierDuClient.getPanier().get( i ).getNomProduit();
+            donnees[i][1] = Float.toString(panierDuClient.getPanier().get( i ).getPrixUnitaire());
+            donnees[i][2] = Integer.toString(panierDuClient.getPanier().get( i ).getQuantiteEnStock());
+        }
+
+
+
+        JTable table =new JTable(donnees,lesChamps);
+        JScrollPane scrollPane = new JScrollPane(table);
+        getContentPane().add( scrollPane,BorderLayout.CENTER );
+
+ */
+
+        /******************     Panel en bas   ********************/
+        //JPanel panelPourBas = new JPanel();
+        //panelPourBas.setLayout( new BorderLayout() );
+        //getContentPane().add( panelPourBas , BorderLayout.PAGE_END);
+
+        /******************     Boutons & textField  ********************/
+        JPanel panelBtnLabel = new JPanel();
+        panelBtnLabel.setLayout( new GridLayout(3,1) );
+
+
+        JTextField saisie = new JTextField();
+        saisie.setPreferredSize( new Dimension(100,30) );
+        saisie.setToolTipText( "Saisir le produit à supprimer ou ajouter" );
+        panelBtnLabel.add( saisie );
+
+        JButton ajouterProduit = new JButton("Ajouter");
+        panelBtnLabel.add( ajouterProduit );
+
+
+        ajouterProduit.addActionListener( e->{
+            panierDuClient=ajouterUnProduitPanier( baseProduit.getListeDeProduit(),panierDuClient, saisie.getText() );
+
+            String [] lesChamps = {"nom", "prix" , "quantite"};
+
+            String [][] donnees = new String[panierDuClient.getPanier().size()][3];
+            for (int i = 0; i < panierDuClient.getPanier().size(); i++) {
+                donnees[i][0] = panierDuClient.getPanier().get( i ).getNomProduit();
+                donnees[i][1] = Float.toString(panierDuClient.getPanier().get( i ).getPrixUnitaire());
+                donnees[i][2] = Integer.toString(panierDuClient.getPanier().get( i ).getQuantiteEnStock());
+            }
+
+            JTable table =new JTable(donnees,lesChamps);
+            JScrollPane scrollPane = new JScrollPane(table);
+            getContentPane().add( scrollPane,BorderLayout.CENTER );
+
+            prixLabel.setText( "Le prix total est: " + panierDuClient.prixTotal());
+
+
+            /******************     JTable affiche pas si  BorderLayout.PAGE_START est vide  ********************/
+            JLabel print = new JLabel("    ");
+            getContentPane().add( print, BorderLayout.PAGE_START );
+            print.setText( "");
+
+        } );
+
+
+
+        JButton supprimerProduit = new JButton("Supprimer");
+        panelBtnLabel.add( supprimerProduit );
+
+        supprimerProduit.addActionListener( e -> {
+
+        supprimerProduitPanier( baseProduit, panierDuClient, saisie.getText() );
+
+        prixLabel.setText( "Le prix total est: " + panierDuClient.prixTotal());
+
+        } );
+
+
+        /******************     label & bouton menu principal  ********************/
+        JPanel panelLabel = new JPanel();
+        panelLabel.setLayout( new GridLayout(2,1) );
+
+        prixLabel = new JLabel("Prix Total: ");
+        panelLabel.add( prixLabel);
+
+        JButton quitter = new JButton("Menu Principal");
+        quitter.setToolTipText( "Revenir au menu principal" );
+        panelLabel.add( quitter );
+
+        JPanel piedsFenetre = new JPanel();
+        piedsFenetre.setLayout( new GridLayout(1,2) );
+        piedsFenetre.add( panelBtnLabel );
+        piedsFenetre.add( panelLabel );
+
+        getContentPane().add( piedsFenetre,BorderLayout.PAGE_END );
 
 
 
     }
+
+
+
+
+
+    /******************    fonction pour ajouter un produit  ********************/
+    private PanierDuClient ajouterUnProduitPanier(ArrayList<Produit>listDesProduits, PanierDuClient produitPanier, String nomDeProduit){
+        float prix;
+        for (int i = 0; i <listDesProduits.size(); i++) {
+            if (nomDeProduit.equals( listDesProduits.get( i ).getNomProduit() )){
+
+                if (listDesProduits.get( i ).getQuantiteEnStock() > 0){
+
+                    prix = listDesProduits.get( i ).getPrixUnitaire();
+
+                    listDesProduits.get( i ).setQuantiteEnStock( (listDesProduits.get( i ).getQuantiteEnStock() - 1) );
+                    produitPanier.ajouteProduit( new Produit( nomDeProduit,prix,1 ) );
+
+                    return produitPanier;
+
+                }else {
+                    JOptionPane.showMessageDialog( null," Désolé, " + nomDeProduit + " est en rupture de stock" );
+
+                }
+            }
+        }
+        return produitPanier;
+    }
+
+
+    /******************    fonction pour supprimer un produit  ********************/
+    private void supprimerProduitPanier(BaseProduit baseProduit, PanierDuClient panierClient, String nomDeProduit) {
+
+
+        for (int i = 0; i < baseProduit.getListeDeProduit().size(); i++) {
+            if (nomDeProduit.equals( baseProduit.getListeDeProduit().get( i ).getNomProduit() )){
+                baseProduit.getListeDeProduit().get( i ).setQuantiteEnStock( (baseProduit.getListeDeProduit().get( i ).getQuantiteEnStock() + 1) );
+                panierClient.supprimerUnProduit( new Produit( nomDeProduit, baseProduit.getListeDeProduit().get( i ).getPrixUnitaire(), baseProduit.getListeDeProduit().get( i ).getQuantiteEnStock()));
+            }
+        }
+    }
+
+    private float prixTotal(){
+        float prix = 0;
+        for ( Produit produit : baseProduit.getListeDeProduit()) {
+            prix += produit.getPrixUnitaire() * produit.getQuantiteEnStock();
+
+        }
+        return prix;
+    }
+
+
 }

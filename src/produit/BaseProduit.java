@@ -19,6 +19,7 @@ public class BaseProduit {
         return listeDeProduit;
     }
 
+
     public ArrayList<Produit> ajouteProduit(Produit produit){
 
             listeDeProduit.add(produit);
