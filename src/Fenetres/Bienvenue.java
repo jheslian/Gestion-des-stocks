@@ -111,6 +111,11 @@ public class Bienvenue extends JFrame {
             if (baseClient.isClientExist( idTextField.getText().trim(), motDePasseField.getText().trim() )){
                 this.setVisible( false );
                 (new AchatDuClient()).setVisible( true );
+                ListeDesProduits listeDesProduits = new ListeDesProduits();
+                listeDesProduits.setVisible( true );
+                listeDesProduits.afficherProduitsBtn.doClick();
+               // listeDesProduits.panel.setVisible( false );
+
             }else
                 JOptionPane.showMessageDialog( null, "Erreur de saisie ou compte n'existe pas", "Erreur", JOptionPane.ERROR_MESSAGE );
         } );

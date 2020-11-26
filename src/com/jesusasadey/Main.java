@@ -1,6 +1,7 @@
 package com.jesusasadey;
 
 import Fenetres.Bienvenue;
+import Fenetres.GestionAdministrateur;
 import Fenetres.ListeDesProduits;
 
 
@@ -15,8 +16,9 @@ public class Main {
             public void run() {
                 try {
                     //new Gestion();
-                    //Bienvenue fenetreClient =  new Bienvenue();
-                    ListeDesProduits fenetreClient =new ListeDesProduits();
+                    Bienvenue fenetreClient =  new Bienvenue();
+                    //ListeDesProduits fenetreClient =new ListeDesProduits();
+                   // GestionAdministrateur fenetreClient =new GestionAdministrateur();
                     fenetreClient.setVisible( true );
 
                 } catch (Exception e) {

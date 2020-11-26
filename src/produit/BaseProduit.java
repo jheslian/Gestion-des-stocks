@@ -3,6 +3,7 @@ package produit;
 
 import objects.Client;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class BaseProduit {
@@ -57,6 +58,7 @@ public class BaseProduit {
                 }
             }
         } else {
+            JOptionPane.showMessageDialog( null, "La liste de produit est vide","",JOptionPane.ERROR_MESSAGE );
             System.out.println("La liste de produit est vide");
         }
 
