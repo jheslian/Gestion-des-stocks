@@ -4,7 +4,6 @@ import produit.BaseProduit;
 import produit.Produit;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -13,8 +12,9 @@ public class ListeDesProduits extends JFrame {
     JTextField quantiteProduitTextField;
     JTextField nomProduitTextField;
     JTextField prixProduitTextField;
-    JPanel panel, panel3;
+    JPanel panelDesChamps, panelFinal,panelBtnJTable ;
     JButton ajouterPoduitBtn,afficherProduitsBtn;
+    JPanel panelBouton;
 
     static BaseProduit baseProduit = new BaseProduit();
 
@@ -22,13 +22,14 @@ public class ListeDesProduits extends JFrame {
     public ListeDesProduits(){
         super("Liste des produits");
 
-        this.setSize( 700, 500 );
+        this.setSize( 1200, 1000 );
         this.setDefaultCloseOperation( DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo( null );
 
-        panel = (JPanel)this.getContentPane();
-        panel.setLayout( new BorderLayout() );
 
+        panelFinal = (JPanel) this.getContentPane();
+        panelFinal.setLayout( new GridLayout(1,2) );
+        //panel.setLayout( new G);
 
 
         /******************     table des produits    ********************/
@@ -43,28 +44,30 @@ public class ListeDesProduits extends JFrame {
         */
 
         /******************     panel pour les saisies   ********************/
-        panel3 = new JPanel();
-        panel3.setLayout( new GridLayout(9,1) );
-        panel.add( panel3, BorderLayout.LINE_START );
+        panelDesChamps = new JPanel();
+        panelDesChamps.setLayout( new GridLayout(5,2) );
+
+        //panel.add( panel3, BorderLayout.LINE_START );
 
         /******************     nom du produit   ********************/
         JLabel nomProduitLabel = new JLabel("  Nom du produit");
-        panel3.add( nomProduitLabel );
+
+        panelDesChamps.add( nomProduitLabel );
 
         nomProduitTextField = new JTextField();
         nomProduitTextField.setPreferredSize( new Dimension(100,30) );
-        panel3.add( nomProduitTextField );
+        panelDesChamps.add( nomProduitTextField );
 
-        JLabel vide1 = new JLabel();
-        panel3.add( vide1 );
+       // JLabel vide1 = new JLabel();
+        //panel3.add( vide1 );
 
         /******************     prix du produit   ********************/
         JLabel prixProduitLabel = new JLabel("  Prix ");
-        panel3.add( prixProduitLabel );
+        panelDesChamps.add( prixProduitLabel );
 
         prixProduitTextField = new JTextField();
         prixProduitTextField.setPreferredSize( new Dimension(100,30) );
-        panel3.add( prixProduitTextField );
+        panelDesChamps.add( prixProduitTextField );
 
         prixProduitTextField.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
@@ -79,16 +82,16 @@ public class ListeDesProduits extends JFrame {
             }
         });
 
-        JLabel vide2 = new JLabel();
-        panel3.add( vide2 );
+        //JLabel vide2 = new JLabel();
+        //panel3.add( vide2 );
 
         /******************     quantité du produit   ********************/
         JLabel quantiteProduitLabel = new JLabel("  Quantité");
-        panel3.add( quantiteProduitLabel );
+        panelDesChamps.add( quantiteProduitLabel );
 
         quantiteProduitTextField = new JTextField();
         quantiteProduitTextField.setPreferredSize( new Dimension(100,30) );
-        panel3.add( quantiteProduitTextField );
+        panelDesChamps.add( quantiteProduitTextField );
 
         quantiteProduitTextField.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
@@ -103,20 +106,23 @@ public class ListeDesProduits extends JFrame {
         });
 
 
-
-
-        JLabel vide3 = new JLabel();
-        panel3.add( vide3 );
+        //JLabel vide3 = new JLabel();
+        //panel3.add( vide3 );
+        /******************     panel pour les boutons et JTable  ********************/
+        panelBtnJTable = new JPanel();
+        panelBtnJTable.setLayout( new BorderLayout() );
 
 
         /******************     panel pour les boutons   ********************/
-        JPanel panelBouton = new JPanel();
-        panelBouton.setLayout( new GridLayout (1,3));
-        panel.add( panelBouton,BorderLayout.PAGE_END );
+        panelBouton = new JPanel();
+        panelBouton.setLayout( new FlowLayout() );
+
+        //panelBouton.setLayout( new GridLayout (1,3));
+        //panelDesChamps.add( panelBouton,BorderLayout.PAGE_END );
 
         /******************     ajouter le produit    ********************/
         ajouterPoduitBtn = new JButton("Ajouter");
-        panelBouton.add( ajouterPoduitBtn );
+        panelDesChamps.add( ajouterPoduitBtn );
 
         ajouterPoduitBtn.addActionListener( e ->{
             if ( baseProduit.siProduitExiste( nomProduitTextField.getText() )){
@@ -149,6 +155,7 @@ public class ListeDesProduits extends JFrame {
 
         /******************     afficher le produit    ********************/
         afficherProduitsBtn = new JButton("Afficher les produits");
+        //afficherProduitsBtn.doClick();
         panelBouton.add( afficherProduitsBtn );
 
         this.setVisible( false);
@@ -163,6 +170,10 @@ public class ListeDesProduits extends JFrame {
             panel.add( sp, BorderLayout.CENTER );
 
              */
+
+            JPanel panelTable = new JPanel();
+            panelTable.setLayout( new GridLayout(1,1));
+
             String [] lesChamps = {"nom", "prix" , "quantite"};
             String [][] donnees = new String[baseProduit.getListeDeProduit().size()][3];
             for (int i = 0; i < baseProduit.getListeDeProduit().size(); i++) {
@@ -172,15 +183,23 @@ public class ListeDesProduits extends JFrame {
             }
             JTable table =new JTable(donnees,lesChamps);
             JScrollPane scrollPane = new JScrollPane(table);
-            getContentPane().add( scrollPane,BorderLayout.CENTER );
+            panelTable.add( scrollPane );
+            panelBtnJTable.add( panelTable, BorderLayout.CENTER );
+            //getContentPane().add( scrollPane,BorderLayout.CENTER );
 
             /******************     JTable affiche pas si  BorderLayout.PAGE_START est vide  ********************/
             JLabel print = new JLabel("    ");
-            panel.add( print, BorderLayout.PAGE_START );
-            print.setText( "");
+            panelBtnJTable.add( print, BorderLayout.PAGE_START );
+           print.setText( "");
+
+            ( new Bienvenue()).setVisible( true );
 
 
         } );
+        panelBtnJTable.add( panelBouton, BorderLayout.PAGE_END );
+
+        panelFinal.add( panelDesChamps );
+        panelFinal.add( panelBtnJTable );
     }
 
 

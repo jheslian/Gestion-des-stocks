@@ -111,10 +111,20 @@ public class Bienvenue extends JFrame {
             if (baseClient.isClientExist( idTextField.getText().trim(), motDePasseField.getText().trim() )){
                 this.setVisible( false );
                 (new AchatDuClient()).setVisible( true );
+                new TestListes();
+
+                /*
                 ListeDesProduits listeDesProduits = new ListeDesProduits();
                 listeDesProduits.setVisible( true );
                 listeDesProduits.afficherProduitsBtn.doClick();
-               // listeDesProduits.panel.setVisible( false );
+                listeDesProduits.panelBouton.setVisible( false );
+
+                listeDesProduits.panelDesChamps.setVisible( false );
+
+                listeDesProduits.panelFinal.setLayout( new GridLayout(1,1));
+                listeDesProduits.panelFinal.getLayout().addLayoutComponent( "", listeDesProduits.panelBtnJTable );
+
+                 */
 
             }else
                 JOptionPane.showMessageDialog( null, "Erreur de saisie ou compte n'existe pas", "Erreur", JOptionPane.ERROR_MESSAGE );

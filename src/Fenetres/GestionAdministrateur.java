@@ -23,6 +23,10 @@ public class GestionAdministrateur extends JFrame {
         constraints.gridx= 0;
         constraints.gridy= 1;
 
+        listesDesProduitsBtn.addActionListener( e ->{
+                (new ListeDesProduits()).setVisible( true );
+        } );
+
 
         panelOption.add( listesDesProduitsBtn, constraints);
 

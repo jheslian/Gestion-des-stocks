@@ -3,6 +3,7 @@ package com.jesusasadey;
 import Fenetres.Bienvenue;
 import Fenetres.GestionAdministrateur;
 import Fenetres.ListeDesProduits;
+import Fenetres.TestListes;
 
 
 import java.awt.*;
@@ -17,6 +18,7 @@ public class Main {
                 try {
                     //new Gestion();
                     Bienvenue fenetreClient =  new Bienvenue();
+                   // TestListes fenetreClient = new TestListes();
                     //ListeDesProduits fenetreClient =new ListeDesProduits();
                    // GestionAdministrateur fenetreClient =new GestionAdministrateur();
                     fenetreClient.setVisible( true );
