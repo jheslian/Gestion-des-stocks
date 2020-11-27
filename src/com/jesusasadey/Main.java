@@ -15,17 +15,17 @@ public class Main {
                 try {
                     //new Gestion();
 
-                   // Bienvenue fenetreClient =  new Bienvenue();
+                    Bienvenue fenetreClient =  new Bienvenue();
                    // TestListes fenetreClient = new TestListes();
-                    ListeDesProduits fenetre =new ListeDesProduits();
-                    fenetre.setVisible( true );
+                    //ListeDesProduits fenetre =new ListeDesProduits();
+                    //fenetre.setVisible( true );
 
-                    ListeDesProduitsClient fen = new ListeDesProduitsClient();
+                   // ListeDesProduitsClient fen = new ListeDesProduitsClient();
 
-                    fen.setVisible( true );
-                    //GestionAdministrateur fenetreClient =new GestionAdministrateur();
+                    //fen.setVisible( true );
+                   // GestionAdministrateur fenetreClient =new GestionAdministrateur();
                     //AchatDuClient fenetreClient = new AchatDuClient();
-                    //fenetreClient.setVisible( true );
+                    fenetreClient.setVisible( true );
 
                 } catch (Exception e) {
                     e.printStackTrace();

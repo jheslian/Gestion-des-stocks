@@ -22,7 +22,6 @@ public class AchatDuClient extends JFrame {
         this.setSize( 800, 600 );
         this.setDefaultCloseOperation( DISPOSE_ON_CLOSE);
         this.setLocation( 50,50 );
-        this.setVisible( false );
 
 /*
         String [] lesChamps = {"nom", "prix" , "quantite"};
@@ -49,7 +48,7 @@ public class AchatDuClient extends JFrame {
 
         /******************     Boutons & textField  ********************/
         JPanel panelBtnLabel = new JPanel();
-        panelBtnLabel.setLayout( new GridLayout(3,1) );
+        panelBtnLabel.setLayout( new GridLayout(4,1) );
 
 
         JTextField saisie = new JTextField();
@@ -101,6 +100,13 @@ public class AchatDuClient extends JFrame {
         } );
 
 
+        /******************     valider le panier    ********************/
+        JButton valider = new JButton("Valider la commande");
+        panelBtnLabel.add( valider );
+
+
+
+
         /******************     label & bouton menu principal  ********************/
         JPanel panelLabel = new JPanel();
         panelLabel.setLayout( new GridLayout(2,1) );
@@ -111,6 +117,15 @@ public class AchatDuClient extends JFrame {
         JButton quitter = new JButton("Menu Principal");
         quitter.setToolTipText( "Revenir au menu principal" );
         panelLabel.add( quitter );
+
+
+        quitter.addActionListener( e->{
+            this.setVisible( false );
+            (new Bienvenue()).setVisible( true );
+
+        } );
+
+
 
         JPanel piedsFenetre = new JPanel();
         piedsFenetre.setLayout( new GridLayout(1,2) );

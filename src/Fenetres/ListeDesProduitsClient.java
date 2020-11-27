@@ -20,21 +20,21 @@ public class ListeDesProduitsClient extends JFrame{
         this.setLocation( 900,50 );
 
 
+        /******************     panel pour les bouton    ********************/
+        JPanel panelBtn =new  JPanel();
+        panelBtn.setLayout( new GridLayout(1, 2) );
+        getContentPane().add( panelBtn, BorderLayout.PAGE_END );
 
-        JPanel panelTable = (JPanel)this.getContentPane();
-
+        /******************     panel pour la table    ********************/
         pane= new JPanel();
         getContentPane().add( pane, BorderLayout.CENTER );
+
+        /******************     affichage de la table    ********************/
         afficherProduitsBtn = new JButton("Afficher les produits");
-        getContentPane().add( afficherProduitsBtn, BorderLayout.PAGE_END );
-
-
-        //pane.setLayout( new GridLayout(1,1));
-
+        panelBtn.add( afficherProduitsBtn );
         afficherProduitsBtn.addActionListener( e->{
             this.remove( pane );
             //this.repaint();
-
 
             donnees = new String[baseProduit.getListeDeProduit().size()][3];
             for (int i = 0; i < baseProduit.getListeDeProduit().size(); i++) {
@@ -53,6 +53,17 @@ public class ListeDesProduitsClient extends JFrame{
        });
 
 
-        this.setVisible( false );
+
+
+        /******************     menu principal    ********************/
+        JButton menuPrincipalBtn = new JButton("Fermer");
+        panelBtn.add( menuPrincipalBtn );
+
+        menuPrincipalBtn.addActionListener( e -> {
+            System.exit( 0 );
+
+        });
+
     }
 }
+

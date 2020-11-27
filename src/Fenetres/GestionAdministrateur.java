@@ -26,6 +26,7 @@ public class GestionAdministrateur extends JFrame {
 
         listesDesProduitsBtn.addActionListener( e ->{
                 (new ListeDesProduits()).setVisible( true );
+                this.setVisible( false );
         } );
 
 
@@ -36,11 +37,44 @@ public class GestionAdministrateur extends JFrame {
         listesDesCommandesBtn.setPreferredSize( new Dimension(200,50) );
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.gridx= 1;
+        constraints.gridx= 0;
         constraints.gridy= 2;
 
         panelOption.add( listesDesCommandesBtn);
 
-        this.setVisible( true );//////???? verify if components works when this window opens
+
+
+        /*
+        ***
+        *
+        * LISTES DES CLIENT BUTTON
+        *
+        *
+        *
+        *
+        *
+        * POSITION PAS BONNE MENU PRINCIPAL
+        *
+        *
+        * */
+        /******************     menu principal    ********************/
+        JButton menuPrincipalBtn = new JButton("Menu Principal");
+        menuPrincipalBtn.setPreferredSize( new Dimension(200,50) );
+
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.gridx= 0;
+        constraints.gridy= 3;
+
+        panelOption.add( menuPrincipalBtn );
+
+        menuPrincipalBtn.addActionListener( e -> {
+            (new Bienvenue()).setVisible( true );
+            this.setVisible( false );
+
+        });
+
+
     }
 }
+
+
