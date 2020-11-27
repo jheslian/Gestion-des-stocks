@@ -2,12 +2,14 @@ package Fenetres;
 
 import console.Administrateur;
 import objects.BaseClient;
+import objects.Client;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Bienvenue extends JFrame {
-    BaseClient baseClient = new BaseClient();
+   static BaseClient baseClient = new BaseClient();
+   static String nomClientCommande;
 
     public Bienvenue(){
         super("Bienvenue");
@@ -106,12 +108,11 @@ public class Bienvenue extends JFrame {
 
         clientBouton.addActionListener( e-> {
             if (baseClient.isClientExist( idTextField.getText().trim(), motDePasseField.getText().trim() )){
-
+                nomClientCommande = recuperNomClient( idTextField.getText() );
                 (new AchatDuClient()).setVisible( true );
 
                 ListeDesProduitsClient listeDesProduitsClient = new ListeDesProduitsClient();
                 listeDesProduitsClient.setVisible( true );
-               // listeDesProduitsClient.afficherProduitsBtn.doClick();
 
                 this.setVisible( false );
 
@@ -143,8 +144,20 @@ public class Bienvenue extends JFrame {
 
         } );
 
-
-
     }
+
+    /******************     methods qui va recuperer le nom de client connecté   ********************/
+    private String recuperNomClient(String identifiant){
+        String nomDeClient = "";
+        for (Client client : baseClient.getListDeClient()) {
+            if (client.getEmail().equals( identifiant )){
+                nomDeClient = client.getNomClient();
+
+            }
+        }
+        return nomDeClient;
+    }
+
+
 
 }

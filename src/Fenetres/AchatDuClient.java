@@ -2,14 +2,20 @@ package Fenetres;
 
 import objects.BaseClient;
 import produit.BaseProduit;
+import produit.Commandes;
 import produit.PanierDuClient;
 import produit.Produit;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static Fenetres.Bienvenue.nomClientCommande;
 import static Fenetres.ListeDesProduits.baseProduit;
 
 public class AchatDuClient extends JFrame {
@@ -104,6 +110,38 @@ public class AchatDuClient extends JFrame {
         JButton valider = new JButton("Valider la commande");
         panelBtnLabel.add( valider );
 
+        Commandes commandes = new Commandes(  nomClientCommande, panierDuClient.getPanier() );
+
+        valider.addActionListener( e ->{
+            FileOutputStream fichierCommandes = null;
+            try {
+                fichierCommandes = new FileOutputStream("fichierCommandes.ser");
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+            ObjectOutputStream oos = null;
+            try {
+                oos = new ObjectOutputStream(fichierCommandes);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            try {
+                oos.writeObject(commandes);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            try {
+                oos.close();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+
+
+            System.out.println(commandes.getNomClient()+  " " + commandes.getPanier());
+
+
+        } );
 
 
 

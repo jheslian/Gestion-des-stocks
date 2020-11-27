@@ -33,7 +33,7 @@ public class GestionAdministrateur extends JFrame {
         panelOption.add( listesDesProduitsBtn, constraints);
 
         /******************     Listes des commandes   ********************/
-        JButton listesDesCommandesBtn = new JButton("Listes des paniers");
+        JButton listesDesCommandesBtn = new JButton("Listes des commandes");
         listesDesCommandesBtn.setPreferredSize( new Dimension(200,50) );
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -41,6 +41,13 @@ public class GestionAdministrateur extends JFrame {
         constraints.gridy= 2;
 
         panelOption.add( listesDesCommandesBtn);
+
+
+        listesDesCommandesBtn.addActionListener( e->{
+            (new ListeDesCommandes()).setVisible( true );
+            this.setVisible( false );
+
+        } );
 
 
 
