@@ -3,13 +3,26 @@ package Fenetres;
 import console.Administrateur;
 import objects.BaseClient;
 import objects.Client;
+import produit.PanierDuClient;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+
+
+/************************************************************************************************************
+ *                                                                                                          *
+ *                                  depart de notre programme : Interface                                   *
+ *                                  Client , Administrateur connexion et                                    *
+ *                                  creation compte client                                                  *
+ * **********************************************************************************************************/
+
 
 public class Bienvenue extends JFrame {
    static BaseClient baseClient = new BaseClient();
    static String nomClientCommande;
+
+   static ArrayList<PanierDuClient> consoleListeDesPanier = new ArrayList<>();
 
     public Bienvenue(){
         super("Bienvenue");
@@ -20,11 +33,7 @@ public class Bienvenue extends JFrame {
 
 
 /******************     creation des panels   ********************/
-        /*
-        JPanel panel = (JPanel)this.getContentPane();
-        panel.setLayout( new FlowLayout() );
 
-         */
         JPanel panel = new JPanel();
         panel.setBackground(Color.gray);
         panel.setLayout(new GridLayout(5, 2));

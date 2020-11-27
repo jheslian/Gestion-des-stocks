@@ -3,10 +3,19 @@ package Fenetres;
 import javax.swing.*;
 import java.awt.*;
 
+/************************************************************************************************************
+ *                                                                                                          *
+ *                                    Interface  Administrateur:                                            *
+ *                                                                                                          *
+ *                                                                                                          *
+ * **********************************************************************************************************/
+
+
+
 public class GestionAdministrateur extends JFrame {
 
     public GestionAdministrateur(){
-        super("Gestion Adminstrateur");
+        super("Gestion Administrateur");
 
         this.setSize( 700, 500 );
         this.setDefaultCloseOperation( DISPOSE_ON_CLOSE);
@@ -51,19 +60,6 @@ public class GestionAdministrateur extends JFrame {
 
 
 
-        /*
-        ***
-        *
-        * LISTES DES CLIENT BUTTON
-        *
-        *
-        *
-        *
-        *
-        * POSITION PAS BONNE MENU PRINCIPAL
-        *
-        *
-        * */
         /******************     menu principal    ********************/
         JButton menuPrincipalBtn = new JButton("Menu Principal");
         menuPrincipalBtn.setPreferredSize( new Dimension(200,50) );

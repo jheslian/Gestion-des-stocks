@@ -5,6 +5,16 @@ import java.awt.*;
 
 import static Fenetres.ListeDesProduits.baseProduit;
 
+
+/************************************************************************************************************
+ *                                                                                                          *
+ *                                     Liste des produits dans le magasin                                   *
+ *                                                                                                          *
+ *                                                                                                          *
+ * **********************************************************************************************************/
+
+
+
 public class ListeDesProduitsClient extends JFrame{
     JButton afficherProduitsBtn;
     static String []  lesChamps = {"nom", "prix" , "quantite"};
@@ -56,11 +66,11 @@ public class ListeDesProduitsClient extends JFrame{
 
 
         /******************     menu principal    ********************/
-        JButton menuPrincipalBtn = new JButton("Fermer");
-        panelBtn.add( menuPrincipalBtn );
+        JButton fermer = new JButton("Fermer");
+        panelBtn.add( fermer );
 
-        menuPrincipalBtn.addActionListener( e -> {
-            System.exit( 0 );
+        fermer.addActionListener( e -> {
+            this.setVisible( false );
 
         });
 

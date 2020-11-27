@@ -1,10 +1,15 @@
 package produit;
 
 
-import objects.Client;
-
 import javax.swing.*;
 import java.util.ArrayList;
+
+/************************************************************************************************************
+ *                                                                                                          *
+ *                                        Base de données des produits                                      *
+ *                                                                                                          *
+ *                                                                                                          *
+ * **********************************************************************************************************/
 
 public class BaseProduit {
     private ArrayList<Produit> listeDeProduit= null;

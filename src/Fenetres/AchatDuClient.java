@@ -13,10 +13,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
+import static Fenetres.Bienvenue.consoleListeDesPanier;
 import static Fenetres.Bienvenue.nomClientCommande;
 import static Fenetres.ListeDesProduits.baseProduit;
+
+/************************************************************************************************************
+ *                                                                                                          *
+ *                                             Client: achat des produits                                   *
+ *                                                                                                          *
+ *                                                                                                          *
+ * **********************************************************************************************************/
 
 public class AchatDuClient extends JFrame {
     JLabel prixLabel;
@@ -29,30 +36,8 @@ public class AchatDuClient extends JFrame {
         this.setDefaultCloseOperation( DISPOSE_ON_CLOSE);
         this.setLocation( 50,50 );
 
-/*
-        String [] lesChamps = {"nom", "prix" , "quantite"};
 
-        String [][] donnees = new String[panierDuClient.getPanier().size()][3];
-        for (int i = 0; i < panierDuClient.getPanier().size(); i++) {
-            donnees[i][0] = panierDuClient.getPanier().get( i ).getNomProduit();
-            donnees[i][1] = Float.toString(panierDuClient.getPanier().get( i ).getPrixUnitaire());
-            donnees[i][2] = Integer.toString(panierDuClient.getPanier().get( i ).getQuantiteEnStock());
-        }
-
-
-
-        JTable table =new JTable(donnees,lesChamps);
-        JScrollPane scrollPane = new JScrollPane(table);
-        getContentPane().add( scrollPane,BorderLayout.CENTER );
-
- */
-
-        /******************     Panel en bas   ********************/
-        //JPanel panelPourBas = new JPanel();
-        //panelPourBas.setLayout( new BorderLayout() );
-        //getContentPane().add( panelPourBas , BorderLayout.PAGE_END);
-
-        /******************     Boutons & textField  ********************/
+        /*******************************     Boutons & textFields: ajouter des produits dans le panier   ******************************/
         JPanel panelBtnLabel = new JPanel();
         panelBtnLabel.setLayout( new GridLayout(4,1) );
 
@@ -85,7 +70,7 @@ public class AchatDuClient extends JFrame {
             prixLabel.setText( "Le prix total est: " + panierDuClient.prixTotal());
 
 
-            /******************     JTable affiche pas si  BorderLayout.PAGE_START est vide  ********************/
+            /******************     JTable affiche pas sans -> en bas  ********************/
             JLabel print = new JLabel("    ");
             getContentPane().add( print, BorderLayout.PAGE_START );
             print.setText( "");
@@ -93,6 +78,7 @@ public class AchatDuClient extends JFrame {
         } );
 
 
+        /******************     supprimer un produit  dans le panier    ********************/
 
         JButton supprimerProduit = new JButton("Supprimer");
         panelBtnLabel.add( supprimerProduit );
@@ -138,7 +124,7 @@ public class AchatDuClient extends JFrame {
 
 
 
-            System.out.println(commandes.getNomClient()+  " " + commandes.getPanier());
+           consoleListeDesPanier.add( panierDuClient );
 
 
         } );

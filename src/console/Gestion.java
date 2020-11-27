@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+/***************************     La classe pour gerer le magasin a partir de la console     ****************************/
+
 public class Gestion {
     Scanner in = new Scanner( System.in );
     BaseClient baseClient = new BaseClient();
@@ -19,7 +21,7 @@ public class Gestion {
 
     public Gestion() throws IOException {
         /*
-        premier menu pour demander l'utilisateur pour se connecter en tant que administrateur ou client
+        *premier menu pour demander l'utilisateur pour se connecter en tant que administrateur ou client
         */
         boolean isRunning = true;
         while (isRunning) {
@@ -43,6 +45,8 @@ public class Gestion {
             }
         }
     }
+
+    /***************************      Administrateur: variation du stock          ******************************/
 
     private void choixAdministrateur(){
         boolean repetition =true;
@@ -76,6 +80,8 @@ public class Gestion {
             }
         }
     }
+
+    /***************************      Administrateur: creation du produit        ******************************/
     private void creerUnProduit() {
         System.out.print("Nom de produit: ");
         String nomDeProduit = in.nextLine();
@@ -99,7 +105,7 @@ public class Gestion {
                 baseProduit.ajouteProduit( produit);
         }
     }
-
+    /***************************************        Connexion client        *******************************************/
     private void choixClient() throws IOException {
         Scanner in = new Scanner( System.in );
         String choix = "";

@@ -13,19 +13,8 @@ public class Main {
         EventQueue.invokeLater( new Runnable() {
             public void run() {
                 try {
-                    //new Gestion();
 
-                    //ListeDesCommandes fenetreClient =  new ListeDesCommandes();
                     Bienvenue fenetreClient =  new Bienvenue();
-                   // TestListes fenetreClient = new TestListes();
-                    //ListeDesProduits fenetre =new ListeDesProduits();
-                    //fenetre.setVisible( true );
-
-                   // ListeDesProduitsClient fen = new ListeDesProduitsClient();
-
-                    //fen.setVisible( true );
-                   // GestionAdministrateur fenetreClient =new GestionAdministrateur();
-                    //AchatDuClient fenetreClient = new AchatDuClient();
                     fenetreClient.setVisible( true );
 
                 } catch (Exception e) {

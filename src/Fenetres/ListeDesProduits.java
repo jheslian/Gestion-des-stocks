@@ -8,6 +8,16 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/************************************************************************************************************
+ *                                                                                                          *
+ *                        Administrateur :  gerer des produit pour le magasin et                            *
+ *                                                                                                          *
+ *                                                                                                          *
+ * **********************************************************************************************************/
+
+
+
+
 public class ListeDesProduits extends JFrame {
     JTextField quantiteProduitTextField;
     JTextField nomProduitTextField;
@@ -35,7 +45,6 @@ public class ListeDesProduits extends JFrame {
         panelDesChamps = new JPanel();
         panelDesChamps.setLayout( new GridLayout(5,2) );
 
-        //panel.add( panel3, BorderLayout.LINE_START );
 
         /******************     nom du produit   ********************/
         JLabel nomProduitLabel = new JLabel("  Nom du produit");
@@ -46,8 +55,6 @@ public class ListeDesProduits extends JFrame {
         nomProduitTextField.setPreferredSize( new Dimension(100,30) );
         panelDesChamps.add( nomProduitTextField );
 
-       // JLabel vide1 = new JLabel();
-        //panel3.add( vide1 );
 
         /******************     prix du produit   ********************/
         JLabel prixProduitLabel = new JLabel("  Prix ");
@@ -70,8 +77,6 @@ public class ListeDesProduits extends JFrame {
             }
         });
 
-        //JLabel vide2 = new JLabel();
-        //panel3.add( vide2 );
 
         /******************     quantité du produit   ********************/
         JLabel quantiteProduitLabel = new JLabel("  Quantité");
@@ -94,8 +99,7 @@ public class ListeDesProduits extends JFrame {
         });
 
 
-        //JLabel vide3 = new JLabel();
-        //panel3.add( vide3 );
+
         /******************     panel pour les boutons et JTable  ********************/
         panelBtnJTable = new JPanel();
         panelBtnJTable.setLayout( new BorderLayout() );
@@ -144,7 +148,6 @@ public class ListeDesProduits extends JFrame {
         /******************     afficher le produit  (Table des produits)  ********************/
         afficherProduitsBtn = new JButton("Afficher les produits");
         afficherProduitsBtn.setPreferredSize( new Dimension(100,30) );
-        //afficherProduitsBtn.doClick();
         panelBouton.add( afficherProduitsBtn );
 
         afficherProduitsBtn.addActionListener( e->{
@@ -170,8 +173,6 @@ public class ListeDesProduits extends JFrame {
             panelBtnJTable.add( print, BorderLayout.PAGE_START );
            print.setText( "");
 
-            //(new AchatDuClient()).setVisible( true );
-
         } );
 
         /******************     menu gestion    ********************/
@@ -184,15 +185,15 @@ public class ListeDesProduits extends JFrame {
 
         });
 
-
         panelBtnJTable.add( panelBouton, BorderLayout.PAGE_END );
-
         panelFinal.add( panelDesChamps );
         panelFinal.add( panelBtnJTable );
 
 
     }
 
+
+    /******************    fonctions pour ajouter un produit et effacer les champs    ********************/
     private void ajouteQuantite() {
         for (int i = 0; i < baseProduit.getListeDeProduit().size(); i++) {
             baseProduit.getListeDeProduit().get( i ).setQuantiteEnStock( (baseProduit.getListeDeProduit().get( i ).getQuantiteEnStock()+ Integer.parseInt( quantiteProduitTextField.getText() )));

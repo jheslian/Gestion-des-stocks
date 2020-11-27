@@ -1,9 +1,14 @@
 package produit;
 
-import objects.Client;
-
-import java.util.ArrayList;
 import java.util.Scanner;
+
+/************************************************************************************************************
+ *                                                                                                          *
+ *                                    Client: achat des produits (console)                                  *
+ *                                                                                                          *
+ *                                                                                                          *
+ * **********************************************************************************************************/
+
 
 public class Achat {
 

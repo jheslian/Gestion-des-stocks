@@ -2,6 +2,13 @@ package objects;
 
 import java.util.Date;
 
+/************************************************************************************************************
+ *                                                                                                          *
+ *                                             compte client                                                *
+ *                                                                                                          *
+ *                                                                                                          *
+ * **********************************************************************************************************/
+
 public class Client {
     private String nomClient;
     private String prenomClient;
@@ -22,20 +29,8 @@ public class Client {
         return nomClient;
     }
 
-    public String getPrenomClient() {
-        return prenomClient;
-    }
-
-    public Date getDateNaissance() {
-        return dateNaissance;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public String getAdresse() {
-        return adresse;
     }
 
     public String getMotDePasseClient() {

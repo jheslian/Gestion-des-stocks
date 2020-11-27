@@ -1,10 +1,18 @@
 package objects;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class BaseClient {
     private ArrayList<Client> listeDeClient = null;
+
+
+    /************************************************************************************************************
+     *                                                                                                          *
+     *                                           Base de donnees des clients                                    *
+     *                                                                                                          *
+     *                                                                                                          *
+     * **********************************************************************************************************/
+
 
     public BaseClient(){
         listeDeClient = new ArrayList<>();

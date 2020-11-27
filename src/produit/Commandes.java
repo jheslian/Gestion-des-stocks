@@ -3,6 +3,13 @@ package produit;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/************************************************************************************************************
+ *                                                                                                          *
+ *                                           Liste des commandes serialisé                                  *
+ *                                                                                                          *
+ *                                                                                                          *
+ * **********************************************************************************************************/
+
 public class Commandes implements Serializable {
 
     private String nomClient;

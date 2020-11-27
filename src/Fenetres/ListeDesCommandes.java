@@ -1,12 +1,29 @@
 package Fenetres;
 
+import produit.Commandes;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
+import java.util.ArrayList;
 
-import static Fenetres.ListeDesProduits.baseProduit;
+import static Fenetres.Bienvenue.consoleListeDesPanier;
+
+
+/************************************************************************************************************
+ *                                                                                                          *
+ *                                         Liste des commandes des clients                                  *
+ *                                                                                                          *
+ *                                                                                                          *
+ * **********************************************************************************************************/
+
 
 public class ListeDesCommandes extends JFrame {
     JButton afficherProduitsBtn;
+    FileInputStream fichierIn ;
+    Commandes commandes;
+    ObjectInputStream ois ;
+    static ArrayList<Commandes> listDeCommandesPanier = new ArrayList<>();
 
     public ListeDesCommandes(){
 
@@ -27,15 +44,52 @@ public class ListeDesCommandes extends JFrame {
 
         afficherProduitsBtn.addActionListener( e->{
 
+        /*******************************     importer un ficher serialisé mais pas encore realisé  *********************************/
+/*
+        while(true){
+            try {
+                if (!(ois.available() > 0))
+                    break;
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            try {
+                fichierIn = new FileInputStream( "fichierCommandes.ser" );
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+
+            try {
+                ois = new ObjectInputStream( fichierIn );
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            try {
+                commandes = (Commandes) ois.readObject();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (ClassNotFoundException classNotFoundException) {
+                classNotFoundException.printStackTrace();
+            }
+
+            listDeCommandesPanier.add( commandes );
+        }
+          */
+
+
             JPanel panelTable = new JPanel();
             panelTable.setLayout( new GridLayout(1,1));
 
-            String [] lesChamps = {"nom", "prix" , "quantite"};
-            String [][] donnees = new String[baseProduit.getListeDeProduit().size()][3];
-            for (int i = 0; i < baseProduit.getListeDeProduit().size(); i++) {
-                donnees[i][0] = baseProduit.getListeDeProduit().get( i ).getNomProduit();
-                donnees[i][1] = Float.toString(baseProduit.getListeDeProduit().get( i ).getPrixUnitaire());
-                donnees[i][2] = Integer.toString(baseProduit.getListeDeProduit().get( i ).getQuantiteEnStock());
+            String [] lesChamps = { "nom du produit",  "quantite"};
+            String [][] donnees = new String[consoleListeDesPanier.size()][2];
+
+            for (int i = 0; i < consoleListeDesPanier.size(); i++) {
+
+                donnees[i][0] = consoleListeDesPanier.get( i ).getPanier().get( 0 ).getNomProduit();
+                donnees[i][1] = Integer.toString(consoleListeDesPanier.get( i ).getPanier().get( 1).getQuantiteEnStock());
+
+                System.out.println(donnees[i][0] + " " + donnees[i][1]);
+
             }
             JTable table =new JTable(donnees,lesChamps);
             JScrollPane scrollPane = new JScrollPane(table);

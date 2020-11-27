@@ -3,6 +3,15 @@ package produit;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/************************************************************************************************************
+ *                                                                                                          *
+ *                              Client: panier pour les produits à realiser                                 *
+ *                            affichage du panier, ajouter et supprimer un produit                          *
+ *                                                                                                          *
+ * **********************************************************************************************************/
+
+
+
 public class PanierDuClient {
     private ArrayList<Produit> panier = null;
     private boolean validerLePanier;
@@ -23,6 +32,10 @@ public class PanierDuClient {
     public void setValiderLePanier(boolean validerLePanier) {
         this.validerLePanier = validerLePanier;
     }
+
+
+
+
 
     public void  afficherUnPanier(){
         if (panier != null) {
@@ -75,7 +88,6 @@ public class PanierDuClient {
     }
 
 
-
     public ArrayList<Produit> ajouteProduit(Produit produitAjouter){
         boolean siProduitExiste = false;
         for (Produit produit : this.panier) {
@@ -92,18 +104,6 @@ public class PanierDuClient {
         return  panier;
     }
 
-
-
-    /*
-    public ArrayList<Produit> changerLaQuantité( String nomDeProduit, int quantite){
-        for (Produit produit : this.panier) {
-            if (produit.getNomProduit().equals( nomDeProduit )){
-                produit.setQuantiteEnStock( (produit.getQuantiteEnStock() + quantite) );
-            }
-        }return  panier;
-    }
-
-     */
 
 }
 

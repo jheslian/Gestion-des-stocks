@@ -2,6 +2,7 @@ package produit;
 
 import java.io.Serializable;
 
+
 public class Produit implements Serializable {
     private String nomProduit;
     private float prixUnitaire;
